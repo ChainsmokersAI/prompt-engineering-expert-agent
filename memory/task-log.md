@@ -1,5 +1,21 @@
 # 작업 이력
 
+## 2026-03-16: domain-researcher YouTube MCP 통합
+
+### [2026-03-16] domain-researcher.md YouTube MCP 통합 업데이트 - 완료
+- **목적**: YouTube MCP 서버(youtube-data-mcp-server)를 domain-researcher 서브에이전트에 통합하여, 웹 자료뿐 아니라 영상 소스도 리서치에 활용 가능하게 함
+- **핵심 전제**: `getTranscripts`는 quota 미소모 (웹 스크래핑), `searchVideos`/`getVideoDetails`/`getChannelStatistics`는 quota 소모 (YouTube Data API)
+- **변경 파일**: `.claude/agents/domain-researcher.md` (단일 파일)
+- **변경 내역 (5건)**:
+  1. Frontmatter tools에 MCP 4개 도구 추가 (`searchVideos`, `getTranscripts`, `getVideoDetails`, `getChannelStatistics`)
+  2. 1단계 소스 유형: 3개 분야별 구체적 소스 예시로 확장 (YouTube 영상, 소셜 미디어, 뉴스레터, 보고서, 관공서 등)
+  3. 1단계 끝에 YouTube 영상 활용 가이드 블록 추가 (quota 효율 전략, 언어별 Transcription, 실패 시 대체 방안)
+  4. 3단계 핵심 인물 탐색: YouTube 채널 활용 가이드 + quota 경고 블록 추가
+  5. 4단계 저서/강연: YouTube 강연/인터뷰 (transcript 기반 원문 발언 확보) 항목 추가
+  6. Part B 출처 메타데이터: 영상 출처 시 채널명, 영상 제목 추가 정보 포함
+
+---
+
 ## 2026-03-16: youtube-data MCP 서버 테스트
 
 ### [2026-03-16] youtube-data MCP 서버 9개 Tool 테스트 - 완료

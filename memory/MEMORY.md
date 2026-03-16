@@ -4,8 +4,9 @@
 
 - **버전**: 첫 번째 전문가 에이전트 생성 완료 (2026-03-16)
 - **구조**: create-expert + add-skill 2개 skill, shared/(템플릿 2개: agent-template, claude-md-template), create-expert/references/(Memory·Knowledge·Persona 가이드 3개), 2개 subagent(domain-researcher opus, expert-reviewer opus), knowledge/ 시스템 (3개 카테고리)
-- **최근 완료**: youtube-data MCP 서버 테스트 완료 (2026-03-16)
+- **최근 완료**: domain-researcher YouTube MCP 통합 (2026-03-16)
 - **MCP 서버**: youtube-data (icraft2170/youtube-data-mcp-server) — 9개 Tool 중 7개 정상, 1개 부분(getTranscripts: 자막 존재 시만), 1개 실패(getRelatedVideos: YouTube API deprecated)
+- **domain-researcher YouTube 통합**: tools에 MCP 4개 추가, 소스 유형 확장, YouTube 활용 가이드/quota 전략 추가, 핵심 인물 탐색에 YouTube 채널 활용 가이드 추가
 - **생성된 전문가**: serial-entrepreneur-agent (초기 스타트업 아이디어 검증, 등급 A)
 - **피드백 반영 완료 (serial-entrepreneur-agent)**: 2건의 사용자 피드백 → 근본 원인 3개 파일(knowledge-system-guide.md, create-expert/SKILL.md, domain-researcher.md)에 재발 방지 가이드 추가 완료 (2026-03-16). experts/ 하위 파일은 사용자가 직접 보완 예정
 - **Part A/B 분리 적용 완료**: domain-researcher 결과물을 Part A (설계 요약) + Part B (원본 자료)로 분리. 서브에이전트 요약에 의한 정보 유실 방지 (2026-03-16)
