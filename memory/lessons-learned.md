@@ -118,6 +118,22 @@
 - **해결**: skill-template.md 삭제, 모든 참조 제거
 - **교훈**: 템플릿의 가치는 "실제 결과물과 구조가 일치"할 때만 있다. 분야마다 구조가 달라지는 파일은 공통 템플릿보다 검증 체크리스트(expert-reviewer)로 관리하는 것이 효과적
 
+### [2026-03-16] 서브에이전트 요약 반환 → 정보 유실 문제
+- **상황**: serial-entrepreneur-agent 생성 시 domain-researcher가 리서치 결과를 "1-2문장 설명", "배경 요약" 등으로 축약하여 반환
+- **문제**: create-expert가 knowledge topic 파일을 생성할 때 원본 정보가 이미 유실된 상태. 결과적으로 topic 파일의 품질이 저하됨 (예: Sales Deck topic이 Pitch Deck에 편향)
+- **해결**: domain-researcher 결과물을 Part A (설계 요약) + Part B (원본 자료)로 분리. Part B에 명시적 반요약 지시 ("요약하지 않습니다"). create-expert 5단계에서 Part B 기반 topic 생성 지침 명확화
+- **교훈**: 서브에이전트가 결과를 요약하면 소비자 측에서 복원할 방법이 없다. 원본은 최대한 보존하여 반환하고, 가공·재구성은 소비자의 책임으로 둬야 한다. 특히 "주요 산출물"과 "설계 판단용 요약"은 파트를 분리하여 각각의 깊이를 명시해야 한다
+
+### [2026-03-16] Knowledge 카테고리명은 구체적으로 명명
+- **상황**: serial-entrepreneur-agent의 knowledge 카테고리 중 `domain-specific`이라는 이름 사용
+- **문제**: 사용자 피드백 — 이름만 보고 어떤 정보가 포함되어 있는지 전혀 파악할 수 없음
+- **교훈**: Knowledge 카테고리명은 내용을 즉시 파악할 수 있도록 구체적으로 명명해야 한다. `domain-specific` ✗ → `ai-simulation-qa`, `market-research-methods` 등 ✓. 범용적인 이름은 카테고리의 탐색성과 유지보수성을 모두 저하시킨다
+
+### [2026-03-16] 사용자 용어를 자의적으로 해석하지 않는다 (Sales Deck ≠ Pitch Deck)
+- **상황**: serial-entrepreneur-agent에서 사용자가 "Sales Deck" 작성 skill을 요청
+- **문제**: Sales Deck knowledge topic을 투자자 대상 Pitch Deck 위주로 작성. Sales Deck은 고객 대상 세일즈 자료(제품 소개서, 제안서, 데모 자료 등)를 포괄하는 개념인데, 투자 피칭에 편향
+- **교훈**: 사용자가 사용한 용어의 범위를 자의적으로 해석하지 않는다. 유사하지만 다른 개념(Sales Deck vs Pitch Deck)은 명확히 구분해야 하며, 불확실하면 사용자에게 확인해야 한다
+
 ### [2026-03-16] 사용자 요청 처리 전 knowledge/ 확인 필수
 - **상황**: domain-researcher subagent 설계 시 knowledge/ 확인 없이 바로 초안 작성에 착수하려 함
 - **문제**: 사용자가 핵심 규칙 4번 "Knowledge 참조 및 기록 의무" 위반을 지적. subagent 설계에 관련된 knowledge(context-engineering-strategies, skill-design-patterns)가 존재했으나 참고하지 않음

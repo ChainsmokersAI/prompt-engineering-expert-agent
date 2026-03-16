@@ -10,6 +10,9 @@ Desktop.ini
 *.swo
 *~
 
+# Generated experts (each expert is a separate project)
+experts/
+
 # Environment / Secrets
 .env
 .env.*

@@ -120,9 +120,14 @@ knowledge/
 새 전문가를 생성할 때:
 
 1. 인터뷰에서 핵심 지식 카테고리 2-4개를 정의
+   - **카테고리 명명 규칙**:
+     - 이름만으로 포함된 내용을 즉시 파악할 수 있어야 합니다
+     - 범용적 이름 금지: `domain-specific` ✗, `general` ✗, `misc` ✗
+     - 구체적 이름 사용: `ai-simulation-qa`, `market-research-methods`, `sales-materials` 등 ✓
+     - 판단 기준: "이 카테고리명을 처음 보는 사람이 어떤 topic이 들어있을지 예측할 수 있는가?"
 2. `knowledge/index.md` 생성 (카테고리 목록)
 3. 각 카테고리 폴더 + `index.md` 생성 (빈 topic 테이블)
-4. 리서치 단계에서 수집한 핵심 지식을 초기 topic으로 등록
+4. domain-researcher의 Part B (원본 자료)를 기반으로 초기 topic 파일 생성 (topic 파일 작성 규칙 참조, create-expert가 전문가 맥락에 맞게 가공·재구성 가능)
 
 ## Memory와의 관계
 

@@ -1,5 +1,59 @@
 # 작업 이력
 
+## 2026-03-16: domain-researcher Part A/B 분리
+
+### [2026-03-16] domain-researcher 원본 자료 반환 + create-expert Knowledge 생성 책임 명확화 - 완료
+- **목적**: domain-researcher가 리서치 자료를 요약 반환하여 정보 유실이 발생하는 문제 해결
+- **핵심 설계**: 결과물을 Part A (설계 요약, 간결) + Part B (원본 자료, 상세)로 분리
+  - Part A → create-expert 3-4단계 (구조/디테일 설계)
+  - Part B → create-expert 5단계 (knowledge topic 생성)
+- **변경 파일 (3개)**:
+  1. `domain-researcher.md` (90→88줄): 리서치 원칙에 원본 보존 원칙 추가, 결과물 형식을 Part A/B로 전면 재구조화, Part B에 반요약 지시 명시
+  2. `create-expert/SKILL.md` (117→124줄): 2단계 Part A/B 데이터 흐름 명시, 3단계 Part A 참조 명시, 5단계 Knowledge topic 생성 지침 확장 (Part B 기반 + 가공 허용)
+  3. `knowledge-system-guide.md` (144→144줄): 초기 세팅 4단계를 Part B 기반으로 구체화
+- **검증**: Part A/B 참조 일관성 ✓, 축약 지시 제거 ✓, 5단계 지침 명확 ✓, 줄 수 적정 ✓
+
+---
+
+## 2026-03-16: Skill/Subagent 피드백 기반 개선
+
+### [2026-03-16] 사용자 피드백 2건 → 근본 원인 skill/subagent 개선 - 완료
+- **목적**: serial-entrepreneur-agent 생성 후 피드백 2건(카테고리명 범용성, 용어 범위 편향)을 Memory에만 기록하고 원인 파일을 미개선한 문제(핵심 규칙 5번 위반) 해결
+- **근본 원인 분석**:
+  1. 카테고리 명명 가이드라인 부재 → knowledge-system-guide.md, create-expert/SKILL.md
+  2. 사용자 용어 범위 확인 절차 부재 → create-expert/SKILL.md, domain-researcher.md
+- **변경 파일 (3개)**:
+  1. `knowledge-system-guide.md` (139→143줄): 초기 세팅 절차 1번에 카테고리 명명 규칙 추가 (범용 이름 금지, 구체적 이름 사용, 판단 기준)
+  2. `create-expert/SKILL.md` (114→117줄): 1단계 인터뷰에 용어 범위 확인 가이드 추가, 4단계 Knowledge 카테고리에 명명 품질 기준 추가
+  3. `domain-researcher.md` (88→89줄): 리서치 원칙에 용어 범위 정확 반영 원칙 추가
+- **검증**: 3개 파일 줄 수 제한 이내 ✓, `domain-specific` 금지 예시 명시 ✓, 기존 내용과 충돌/중복 없음 ✓
+- **Memory 업데이트**: MEMORY.md "미반영 피드백" → "피드백 반영 완료"로 변경, "자주 하는 실수" 1건 추가
+
+---
+
+## 2026-03-16: serial-entrepreneur-agent 전문가 생성
+
+### [2026-03-16] serial-entrepreneur-agent 전문가 생성 - 완료
+- **목적**: 초기 스타트업 아이디어 검증 전문가 에이전트 신규 생성
+- **인터뷰**: 분야(초기 스타트업 아이디어 검증), 핵심 역할(랜딩 페이지 개발, 시장 조사, 세일즈 자료 작성), 멘토(Eric Ries, Paul Graham + Buffer/Zapier/토스 사례)
+- **리서치**: domain-researcher subagent로 분야/멘토 심층 리서치 수행 (11개 출처, 10개 topic 원본 자료 반환)
+- **구조 협의**: 사용자 피드백으로 전문가명, 페르소나 경력, skill/subagent 구성, knowledge 카테고리 조정
+- **생성 파일 (27개)**:
+  - `experts/serial-entrepreneur-agent/CLAUDE.md` (81줄)
+  - `experts/serial-entrepreneur-agent/README.md`
+  - `experts/serial-entrepreneur-agent/references/` (memory-system-guide.md, knowledge-system-guide.md)
+  - `.claude/skills/build-landing-page/SKILL.md` (83줄), `.claude/skills/create-sales-deck/SKILL.md` (97줄)
+  - `.claude/agents/case-researcher.md`, `.claude/agents/market-researcher.md`
+  - `memory/` (MEMORY.md + 3개 하위 파일)
+  - `knowledge/` (index.md + 4개 카테고리 index + 10개 topic 파일)
+- **검증**: expert-reviewer 등급 A, 권장 개선 3건 중 2건 반영 (R-1: create-sales-deck 리뷰 단계 추가, R-2: 참조 경로 "(프로젝트 루트 기준)" 명기)
+- **사용자 지적**: SKILL.md frontmatter에 name 필드 누락 → 즉시 수정
+- **사용자 피드백 (생성 후)**: 2건 (사용자가 직접 보완 예정, 즉시 수정 없음)
+  1. knowledge/ `domain-specific` 카테고리명이 너무 범용적 — 어떤 정보가 포함되어 있는지 알 수 없음. 더 구체적인 이름 필요 (예: `ai-simulation-qa` 등)
+  2. knowledge/ Sales Deck topic 내용이 투자 Pitch Deck에 편향 — Sales Deck은 고객 대상 세일즈 자료를 포괄해야 하는데, 투자자 피치덱 위주로 작성됨
+
+---
+
 ## 2026-03-16: researcher subagent 삭제 + 프로젝트 구조 점검
 
 ### [2026-03-16] researcher 삭제 및 프로젝트 구조 점검 - 완료
