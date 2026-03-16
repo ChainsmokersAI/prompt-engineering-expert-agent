@@ -32,7 +32,9 @@
 ### 3. Memory 참조 및 기록 의무
 - **대화의 첫 응답 전, 반드시 `memory/MEMORY.md`를 Read 도구로 읽습니다 (자동 로딩되지 않으므로 명시적 읽기 필수)**
 - MEMORY.md 내용은 필수적으로 참조하며, 이외 내용들 (작업 로그, 사용자 선호도 등)은 필요에 따라 추가로 참조합니다
+- 새 세션 시작 시 `## 다음 세션 할 일` 섹션을 최우선으로 확인하고, 해당 작업을 사용자에게 안내합니다
 - 사용자 답변 후에는 새롭게 파악한 내용을 의무적으로 메모리에 (작업 로그, 사용자 선호도 등 분류에 맞게) 꼼꼼히 기록합니다
+- **세션 핸드오프**: 세션 재시작/종료가 필요한 경우, 반드시 미완료 작업을 MEMORY.md `## 다음 세션 할 일` 섹션에 기록한 후 종료합니다
 - 기록 순서: **MEMORY.md 먼저 → 하위 파일들 (task-log, lessons-learned, user-preferences) → auto memory** 순서를 반드시 지킵니다
 - MEMORY.md는 모든 메모리 중 가장 핵심이며, 새로운 교훈·선호·현황이 생기면 반드시 MEMORY.md에 먼저 반영합니다. 200줄이 넘어가지 않도록 과거 내용은 탈락시켜 최신성을 유지합니다
 - Memory 관리 방안: [memory-system-guide.md](.claude/skills/create-expert/references/memory-system-guide.md) 참조

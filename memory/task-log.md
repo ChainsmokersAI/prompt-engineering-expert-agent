@@ -1,5 +1,40 @@
 # 작업 이력
 
+## 2026-03-16: youtube-data MCP 서버 테스트
+
+### [2026-03-16] youtube-data MCP 서버 9개 Tool 테스트 - 완료
+- **목적**: 직전 세션에서 추가한 youtube-data MCP 서버의 전체 Tool 동작 검증
+- **테스트 결과**:
+  | Tool | 결과 | 비고 |
+  |------|------|------|
+  | searchVideos | ✅ 정상 | query, maxResults 정상 |
+  | getTrendingVideos | ✅ 정상 | regionCode(KR), categoryId 정상 |
+  | getVideoDetails | ✅ 정상 | 메타데이터, 통계, 상세정보 반환 |
+  | getVideoEngagementRatio | ✅ 정상 | 참여율 계산 (복수 영상) |
+  | getChannelStatistics | ✅ 정상 | 구독자, 조회수, 영상 수 반환 |
+  | getChannelTopVideos | ✅ 정상 | 인기 영상 목록 반환 |
+  | compareVideos | ✅ 정상 | 복수 영상 통계 비교 |
+  | getTranscripts | ⚠️ 부분 | 한국어 자막 미존재 시 에러(정상), 영어 요청 시 빈 배열(캡션 형태 의존) |
+  | getRelatedVideos | ❌ 실패 | `Invalid argument` — YouTube Data API v3에서 relatedToVideoId deprecated |
+- **결론**: 9개 중 7개 완전 정상, 실질 사용에 문제 없음. getRelatedVideos는 YouTube API 제한으로 사용 불가
+
+---
+
+## 2026-03-16: YouTube MCP 서버 추가
+
+### [2026-03-16] youtube-data MCP 서버 프로젝트 레벨 추가 - 완료
+- **목적**: 유튜브 영상 내용 요약, 채널/영상 추천 기능을 위한 MCP 서버 설치
+- **선택 서버**: icraft2170/youtube-data-mcp-server (올인원, 9개 Tool)
+- **설정 파일**: `.mcp.json` (프로젝트 레벨)
+- **주요 설정**:
+  - Transport: stdio
+  - Command: `npx -y youtube-data-mcp-server`
+  - 환경 변수: YOUTUBE_API_KEY (사용자 키), YOUTUBE_TRANSCRIPT_LANG=ko
+- **추가 조치**: `.gitignore`에 `.mcp.json` 추가 (API 키 노출 방지)
+- **검증**: `claude mcp list` → youtube-data: Connected ✓
+
+---
+
 ## 2026-03-16: domain-researcher Part A/B 분리
 
 ### [2026-03-16] domain-researcher 원본 자료 반환 + create-expert Knowledge 생성 책임 명확화 - 완료

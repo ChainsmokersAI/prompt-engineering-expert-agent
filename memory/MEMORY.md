@@ -4,15 +4,21 @@
 
 - **버전**: 첫 번째 전문가 에이전트 생성 완료 (2026-03-16)
 - **구조**: create-expert + add-skill 2개 skill, shared/(템플릿 2개: agent-template, claude-md-template), create-expert/references/(Memory·Knowledge·Persona 가이드 3개), 2개 subagent(domain-researcher opus, expert-reviewer opus), knowledge/ 시스템 (3개 카테고리)
-- **최근 완료**: serial-entrepreneur-agent 전문가 생성 (2개 skill, 2개 subagent, 4개 knowledge 카테고리, 10개 topic) (2026-03-16)
+- **최근 완료**: youtube-data MCP 서버 테스트 완료 (2026-03-16)
+- **MCP 서버**: youtube-data (icraft2170/youtube-data-mcp-server) — 9개 Tool 중 7개 정상, 1개 부분(getTranscripts: 자막 존재 시만), 1개 실패(getRelatedVideos: YouTube API deprecated)
 - **생성된 전문가**: serial-entrepreneur-agent (초기 스타트업 아이디어 검증, 등급 A)
 - **피드백 반영 완료 (serial-entrepreneur-agent)**: 2건의 사용자 피드백 → 근본 원인 3개 파일(knowledge-system-guide.md, create-expert/SKILL.md, domain-researcher.md)에 재발 방지 가이드 추가 완료 (2026-03-16). experts/ 하위 파일은 사용자가 직접 보완 예정
 - **Part A/B 분리 적용 완료**: domain-researcher 결과물을 Part A (설계 요약) + Part B (원본 자료)로 분리. 서브에이전트 요약에 의한 정보 유실 방지 (2026-03-16)
+
+## 다음 세션 할 일
+
+(없음)
 
 ## 핵심 교훈
 
 ### 최신 교훈
 
+- 세션 재시작이 필요한 작업 시, 반드시 미완료 작업을 MEMORY.md `## 다음 세션 할 일`에 기록한 후 종료해야 한다 (세션 핸드오프)
 - 서브에이전트가 요약하여 반환하면 정보 유실이 발생한다. 원본 자료는 최대한 보존하여 반환하고, 소비자(create-expert)가 맥락에 맞게 가공해야 한다 (Part A/B 분리)
 - Knowledge 카테고리명은 내용을 즉시 파악할 수 있도록 구체적으로 명명해야 한다 (`domain-specific` ✗ → `ai-simulation-qa` 등 ✓)
 - 사용자의 용어를 자의적으로 해석하지 않는다. Sales Deck ≠ Pitch Deck — 범위를 정확히 확인하고 반영해야 한다
@@ -61,6 +67,7 @@
 | Knowledge index.md topic 수 미갱신 | topic 파일 추가 시 반드시 루트 index.md의 topic 수도 함께 갱신 |
 | 사용자 요청 처리 시 knowledge/ 미확인 (1회) | 핵심 규칙 4번: 요청 처리 전 반드시 knowledge/에서 관련 자료 존재 여부를 먼저 확인한다 |
 | 사용자 피드백 후 skill/subagent 미개선 (1회) | 핵심 규칙 5번: Memory에만 기록하지 않고, 원인이 된 skill/subagent 파일도 반드시 개선한다 |
+| 세션 재시작 전 미완료 작업 미기록 (1회) | 세션 핸드오프: MEMORY.md `## 다음 세션 할 일`에 미완료 작업 + 배경 맥락을 기록한 후 종료한다 |
 
 ## 사용자 핵심 선호
 
