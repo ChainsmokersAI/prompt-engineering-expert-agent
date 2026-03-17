@@ -1,5 +1,37 @@
 # 작업 이력
 
+## 2026-03-17: 브라우저 자동화 상담 + MEMORY.md 누락 수정
+
+### [2026-03-17] 브라우저 자동화 방식 상담 - 완료
+- **배경**: 네이버 부동산(new.land.naver.com) 매물 검색 시도 → WebFetch 접근 차단 확인
+- **상담 내용**: Chrome 확장 vs Playwright MCP 비교
+  - Chrome 확장: 일회성/시각적 판단 필요 시 적합, `claude --chrome` 또는 `/chrome`으로 실행
+  - Playwright MCP: 반복 루프 워크플로우에 적합, `claude mcp add --transport stdio playwright -- npx -y @playwright/mcp@latest`
+  - Claude + Playwright MCP는 하드코딩 스크립트가 아니라 LLM이 매 단계 판단하므로 Edge Case 대응도 어느 정도 가능
+- **결론**: 네이버 부동산 매물 반복 수집은 Playwright MCP 권장, 실패 시 스킵/로깅 방어 로직 포함
+
+### [2026-03-17] MEMORY.md 최근 완료 필드 누락 수정 - 완료
+- **문제**: 네이버 검색 MCP 추가 후 task-log는 기록했으나 MEMORY.md `최근 완료` 필드 미갱신
+- **수정**: `최근 완료` → 네이버 검색 MCP 서버 추가로 갱신
+- **재발 횟수**: Memory 기록 누락 4회째
+
+---
+
+## 2026-03-17: 네이버 검색 MCP 서버 추가
+
+### [2026-03-17] naver-search MCP 서버 프로젝트 레벨 추가 - 완료
+- **목적**: 한국어 콘텐츠(블로그, 뉴스, 카페 등) 리서치 역량 강화를 위한 네이버 검색 MCP 서버 추가
+- **선택 서버**: @isnow890/naver-search-mcp (NPM, 15개 Tool)
+- **수정 파일 (4개)**:
+  - `.mcp.json`: naver-search 서버 설정 추가 (`${NAVER_CLIENT_ID}`, `${NAVER_CLIENT_SECRET}` 환경 변수 확장)
+  - `.claude/agents/domain-researcher.md`: tools에 네이버 4개 도구 추가 (blog, news, web, cafe) + 네이버 검색 활용 가이드 추가 (라이프스타일 분야 강조)
+  - `knowledge/claude-code/mcp-server-configuration.md`: 프로젝트 MCP 서버 현황 테이블 추가
+  - `knowledge/claude-code/index.md`: mcp-server-configuration topic 설명 및 날짜 갱신
+- **사용자 피드백**: `naver_academic_search` 제외 — 논문은 WebSearch가 더 효과적. 대신 라이프스타일 분야 활용 가이드 추가
+- **검증**: `claude mcp list` → naver-search: Connected ✓. Tool 개별 테스트는 환경 변수 설정 후 수행 예정
+
+---
+
 ## 2026-03-17: 범용 교훈 상속 — zero-to-one-advisor + create-expert
 
 ### [2026-03-17] 범용 교훈 상속 구현 - 완료

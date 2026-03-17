@@ -1,7 +1,7 @@
 ---
 name: domain-researcher
 description: 전문가 에이전트 생성 시 해당 분야와 멘토에 대한 심층 리서치를 수행합니다. 분야별 특성에 맞는 소스 선택과 최신성 기준을 자체 판단하며, 전문가 설계에 바로 활용 가능한 구조화된 결과물을 반환합니다. 새로운 전문가를 생성할 때 분야/멘토 리서치가 필요한 경우 사용합니다.
-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, mcp__youtube-data__searchVideos, mcp__youtube-data__getTranscripts, mcp__youtube-data__getVideoDetails, mcp__youtube-data__getChannelStatistics
+tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, mcp__youtube-data__searchVideos, mcp__youtube-data__getTranscripts, mcp__youtube-data__getVideoDetails, mcp__youtube-data__getChannelStatistics, mcp__naver-search__naver_blog_search, mcp__naver-search__naver_news_search, mcp__naver-search__naver_web_search, mcp__naver-search__naver_cafe_search
 model: opus
 ---
 
@@ -36,6 +36,11 @@ model: opus
 > - **Quota 효율 전략**: 영상 검색은 웹 검색(WebSearch)으로 우선 수행하고, 특정 영상의 내용 파악이 필요할 때만 `getTranscripts`를 사용합니다. `getTranscripts`는 quota를 소모하지 않으므로 자유롭게 사용할 수 있습니다
 > - `searchVideos`, `getVideoDetails`, `getChannelStatistics`는 YouTube API quota를 소모하므로, 웹 검색으로 충분히 파악되지 않는 경우에만 사용합니다
 > - Transcription 실패 시 (자막 미제공 영상): 해당 영상은 skip하고 동일 주제의 자막 있는 영상으로 대체합니다
+
+> **네이버 검색 활용 가이드**
+> - 한국어 콘텐츠 리서치에 우선 활용합니다: 블로그(`naver_blog_search`), 뉴스(`naver_news_search`), 카페(`naver_cafe_search`)
+> - 특히, 라이프스타일 분야 (재테크, 부동산, 여행, 건강 등) 리서치에서 한국 사용자 경험과 실무 정보를 파악하는 데 효과적입니다
+> - WebSearch와 병행하여 교차 검증합니다 — 네이버 검색은 한국어 콘텐츠에 강점이 있고, WebSearch는 글로벌 콘텐츠에 강점이 있습니다
 
 ### 2단계: 기존 자료 확인
 

@@ -4,9 +4,11 @@
 
 - **버전**: 두 번째 전문가 에이전트 생성 + 피드백 반영 완료 (2026-03-17)
 - **구조**: create-expert + add-skill 2개 skill, shared/(템플릿 2개: agent-template, claude-md-template), create-expert/references/(Memory·Knowledge·Persona 가이드 3개), 2개 subagent(domain-researcher opus, expert-reviewer opus), knowledge/ 시스템 (3개 카테고리)
-- **최근 완료**: 범용 교훈 상속 — zero-to-one-advisor MEMORY.md 초기화 + create-expert SKILL.md 가이드 추가 (2026-03-17)
-- **MCP 서버**: youtube-data (icraft2170/youtube-data-mcp-server) — 9개 Tool 중 7개 정상, 1개 부분(getTranscripts: 자막 존재 시만), 1개 실패(getRelatedVideos: YouTube API deprecated). `.mcp.json`은 `${VAR}` 환경 변수 확장 사용 (API 키 분리, git 커밋 가능)
-- **domain-researcher YouTube 통합**: tools에 MCP 4개 추가, 소스 유형 확장, YouTube 활용 가이드/quota 전략 추가, 핵심 인물 탐색에 YouTube 채널 활용 가이드 추가
+- **최근 완료**: 네이버 검색 MCP 서버 추가 — naver-search MCP 프로젝트 레벨 설정 + domain-researcher 네이버 4개 도구 통합 + knowledge 업데이트 (2026-03-17)
+- **MCP 서버**: `.mcp.json`은 `${VAR}` 환경 변수 확장 사용 (API 키 분리, git 커밋 가능)
+  - youtube-data (youtube-data-mcp-server) — 9개 Tool 중 7개 정상, 1개 부분(getTranscripts: 자막 존재 시만), 1개 실패(getRelatedVideos: YouTube API deprecated)
+  - naver-search (@isnow890/naver-search-mcp) — 네이버 검색 11종 + DataLab 2종 + 유틸리티 1종. 환경 변수: `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET`
+- **domain-researcher MCP 통합**: YouTube 4개 + 네이버 4개(blog, news, web, cafe) 도구 사용. YouTube/네이버 활용 가이드 포함. 네이버는 라이프스타일 분야 리서치에 특히 효과적
 - **생성된 전문가**: serial-entrepreneur-agent (초기 스타트업 아이디어 검증, 등급 A), zero-to-one-advisor (초기 스타트업 Zero-to-One 전문가, 등급 B→A 수정 완료)
 - **피드백 반영 완료 (serial-entrepreneur-agent)**: 2건의 사용자 피드백 → 근본 원인 3개 파일에 재발 방지 가이드 추가 완료 (2026-03-16)
 - **zero-to-one-advisor 생성 완료 (2026-03-16)**: 34개 파일. expert-reviewer 검증 후 필수 수정 1건 + 권장 개선 1건 반영 완료
@@ -68,7 +70,7 @@
 
 | 실수 | 해결법 |
 |------|--------|
-| Memory 기록 누락 (3회 반복) | 모든 작업 완료 후 반드시 Memory 업데이트 — MEMORY.md뿐 아니라 task-log, lessons-learned 등 하위 파일도 빠짐없이 |
+| Memory 기록 누락 (4회 반복) | 모든 작업 완료 후 반드시 Memory 업데이트 — MEMORY.md의 **최근 완료** 필드를 포함하여 task-log, lessons-learned 등 하위 파일도 빠짐없이 |
 | 프로젝트 memory 우선순위 역전 (2회 반복) | 기록 순서: 프로젝트 memory/ 먼저 → auto memory 그 다음. 절대 뒤바꾸지 않는다 |
 | 스킬 변경 시 CLAUDE.md 핵심 명령어 미동기화 | 스킬 추가/분리/삭제 시 반드시 CLAUDE.md 핵심 명령어 섹션 함께 업데이트 |
 | Knowledge index.md topic 수 미갱신 | topic 파일 추가 시 반드시 루트 index.md의 topic 수도 함께 갱신 |

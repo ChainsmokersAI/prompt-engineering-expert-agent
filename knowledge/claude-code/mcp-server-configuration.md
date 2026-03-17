@@ -1,6 +1,6 @@
 # MCP Server Configuration
 
-> 최종 업데이트: 2026-03-16
+> 최종 업데이트: 2026-03-17
 > 출처: Claude Code 공식 문서 (https://code.claude.com/docs/en/mcp.md, https://code.claude.com/docs/en/settings.md), GitHub Issue #4976
 > 신뢰도: 최고 (공식 문서)
 
@@ -64,3 +64,10 @@ claude mcp reset-project-choices
 
 - `.claude/settings.json`은 MCP 설정에 사용되지 않습니다 (이전 문서 오류로 혼란 발생, GitHub Issue #4976에서 수정됨)
 - `claude mcp add` 실행 시 scope에 따라 자동으로 올바른 파일에 기록됩니다
+
+## 프로젝트 MCP 서버 현황
+
+| 서버명 | 패키지 | 환경 변수 | 주요 용도 |
+|--------|--------|-----------|-----------|
+| youtube-data | youtube-data-mcp-server | `YOUTUBE_API_KEY` | YouTube 영상 검색, Transcript, 채널 통계 |
+| naver-search | @isnow890/naver-search-mcp | `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET` | 네이버 검색 (블로그, 뉴스, 카페, 웹, 학술 등 11종) + DataLab (트렌드 분석) |

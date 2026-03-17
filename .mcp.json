@@ -11,6 +11,18 @@
         "YOUTUBE_API_KEY": "${YOUTUBE_API_KEY}",
         "YOUTUBE_TRANSCRIPT_LANG": "ko"
       }
+    },
+    "naver-search": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@isnow890/naver-search-mcp"
+      ],
+      "env": {
+        "NAVER_CLIENT_ID": "${NAVER_CLIENT_ID}",
+        "NAVER_CLIENT_SECRET": "${NAVER_CLIENT_SECRET}"
+      }
     }
   }
 }
