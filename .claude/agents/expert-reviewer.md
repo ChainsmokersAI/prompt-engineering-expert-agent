@@ -72,6 +72,9 @@ model: opus
 - 최소 권한 원칙 준수 여부 (필요한 도구만 허용)
 - 모델 선택이 역할에 적합한가
 - description의 구체성
+- subagent tools에 `mcp__` 도구가 있으면: `.mcp.json`에 해당 MCP 서버 설정이 존재하는가
+- `.mcp.json`의 민감값이 `${VAR}` 환경 변수 확장을 사용하는가
+- README.md에 필요한 환경 변수 안내가 있는가
 
 **Memory 시스템 검증**:
 - memory/MEMORY.md 존재 및 200줄 이내

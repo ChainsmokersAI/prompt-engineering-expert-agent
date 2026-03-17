@@ -107,6 +107,23 @@
 - **해결**: 3단계(구조 제안: 폴더/페르소나/Context 배치) → 4단계(디테일 제안: 각 파일 세부 내용) 분리
 - **교훈**: Human Checkpoint는 판단 단위별로 분리해야 한다. 큰 틀에 합의한 후 세부 내용을 제안하면 피드백 품질이 높아진다.
 
+### [2026-03-16] 리서치 전용 subagent에 Bash 도구 불필요
+- **상황**: zero-to-one-advisor의 startup-researcher subagent에 Bash 도구를 포함하여 생성
+- **문제**: expert-reviewer가 최소 권한 원칙 위배로 지적. 리서치 전용 subagent가 수행하는 작업(웹 검색, 파일 읽기, YouTube API)에 Bash가 필요하지 않음
+- **해결**: tools에서 Bash 제거
+- **교훈**: domain-researcher에 Bash가 있다고 해서 동일하게 넣지 말고, 해당 subagent의 실제 작업에 필요한 도구만 포함해야 한다. 리서치 전용은 Read, Grep, Glob, WebSearch, WebFetch + MCP로 충분하다
+
+### [2026-03-16] CLAUDE.md에 구체적 숫자를 넣으면 동기화 부담
+- **상황**: CLAUDE.md 프로젝트 구조에 "5개 카테고리, 15개 topic"이라고 숫자를 명기
+- **문제**: expert-reviewer가 동기화 부담 지적 — Knowledge 카테고리/topic 추가 시 CLAUDE.md와 knowledge/index.md 두 곳을 동시에 업데이트해야 함
+- **해결**: CLAUDE.md에서 숫자 제거, "knowledge/index.md 참조"로 변경
+- **교훈**: 변경 빈도가 높은 정보(topic 수 등)는 CLAUDE.md에 직접 기재하지 않고, single source of truth(index.md)를 참조하도록 해야 한다
+
+### [2026-03-16] Memory 하위 파일(task-log 등) 업데이트 누락
+- **상황**: zero-to-one-advisor 생성 후 MEMORY.md만 업데이트하고 task-log, lessons-learned 업데이트를 누락
+- **문제**: 사용자가 "메모리 업데이트가 확실하지 않았던 것 같은데요?"라고 지적
+- **교훈**: MEMORY.md 업데이트만으로 끝내지 않는다. 기록 순서를 끝까지 완수해야 한다: MEMORY.md → task-log → lessons-learned → user-preferences (해당되는 모든 파일)
+
 ### [2026-03-16] 검증 기준은 Single Source of Truth로 관리
 - **상황**: create-expert, add-skill 각각의 6단계에 검증 항목 리스트가 있고, expert-reviewer.md에도 검증 항목이 있어 3곳 이중 관리
 - **문제**: 검증 항목 변경 시 3곳을 동시에 수정해야 하며, 불일치 발생 위험. 실제로 "공통 원칙 검증" 항목이 CLAUDE.md 핵심 규칙과 sync되지 않았음
@@ -129,10 +146,40 @@
 - **문제**: 사용자 피드백 — 이름만 보고 어떤 정보가 포함되어 있는지 전혀 파악할 수 없음
 - **교훈**: Knowledge 카테고리명은 내용을 즉시 파악할 수 있도록 구체적으로 명명해야 한다. `domain-specific` ✗ → `ai-simulation-qa`, `market-research-methods` 등 ✓. 범용적인 이름은 카테고리의 탐색성과 유지보수성을 모두 저하시킨다
 
+### [2026-03-17] 교훈의 핵심 원리를 이해하고, 예시에 과도 집중하지 않는다
+- **상황**: serial-entrepreneur-agent 피드백에서 "Sales Deck ≠ Pitch Deck 구분이 필요하다"는 교훈을 도출
+- **문제**: zero-to-one-advisor 생성 시 이 교훈의 핵심("자의적 해석 금지")이 아닌 예시("구분을 강조하라")에 집착하여, Sales Deck vs Pitch Deck 구분을 핵심 원칙으로 격상시키고 description과 워크플로우에 과도하게 반영
+- **해결**: 핵심 원칙에서 Pitch Deck 구분 삭제, 워크플로우 1단계에서만 간략히 유지, CLAUDE.md에서 목적("초기 고객 확보") 중심으로 재서술
+- **교훈**: 교훈을 적용할 때는 "이 교훈이 말하고자 하는 핵심 원리가 무엇인가?"를 먼저 파악해야 한다. 예시나 구체적 사례는 원리의 한 인스턴스일 뿐, 그 자체가 원칙이 되어서는 안 된다
+
+### [2026-03-17] skill description은 자연스러운 문장으로 핵심 가치와 트리거를 차별화
+- **상황**: 4개 skill의 description이 동일 구조("~컨설팅 skill입니다. [나열]. ~할 때 트리거됩니다.")로 작성됨
+- **문제**: 키워드 나열 방식으로 인해 트리거 겹침 발생 (예: "Smoke Test"가 idea-validation과 landing-page 양쪽에 등장). 각 skill의 고유 가치가 description에서 드러나지 않음
+- **해결**: Claude Code 공식 패턴(what + when)에 따라, 첫 문장에서 고유 핵심 가치를 차별화하고, 트리거 조건을 구체적 행동 기반으로 서술
+- **교훈**: skill description 작성 시 (1) 첫 문장에서 이 skill만의 고유 가치를 명확히 제시하고, (2) 트리거 조건은 키워드가 아닌 사용자의 구체적 행동/요청으로 서술하며, (3) 여러 skill 간 겹치는 키워드가 없도록 교차 확인해야 한다
+
 ### [2026-03-16] 사용자 용어를 자의적으로 해석하지 않는다 (Sales Deck ≠ Pitch Deck)
 - **상황**: serial-entrepreneur-agent에서 사용자가 "Sales Deck" 작성 skill을 요청
 - **문제**: Sales Deck knowledge topic을 투자자 대상 Pitch Deck 위주로 작성. Sales Deck은 고객 대상 세일즈 자료(제품 소개서, 제안서, 데모 자료 등)를 포괄하는 개념인데, 투자 피칭에 편향
 - **교훈**: 사용자가 사용한 용어의 범위를 자의적으로 해석하지 않는다. 유사하지만 다른 개념(Sales Deck vs Pitch Deck)은 명확히 구분해야 하며, 불확실하면 사용자에게 확인해야 한다
+
+### [2026-03-17] 전문가 생성 시 MCP 설정 미상속
+- **상황**: zero-to-one-advisor의 startup-researcher가 `mcp__youtube-data__*` 도구 4개를 사용하지만, 전문가 프로젝트에 `.mcp.json`이 없음
+- **문제**: 각 전문가는 별도 프로젝트로 운영되므로 부모 프로젝트의 `.mcp.json`을 상속받지 않음. 독립 실행 시 MCP 도구가 작동하지 않음
+- **해결**: create-expert SKILL.md 5단계에 MCP 설정 가이드 추가, expert-reviewer에 MCP 일관성 검증 항목 추가, zero-to-one-advisor에 `.mcp.json` 생성
+- **교훈**: "별도 프로젝트" 원칙의 실질적 함의를 모든 설정 파일에 적용해야 한다. `.mcp.json`도 CLAUDE.md, memory/, knowledge/와 마찬가지로 전문가 프로젝트에 독립적으로 필요하다
+
+### [2026-03-17] knowledge/ 사전 확인 2회째 누락 — CLAUDE.md 구조적 강화
+- **상황**: zero-to-one-advisor 피드백 반영 작업 시작 시 knowledge/ 확인 없이 바로 작업에 착수
+- **문제**: 2026-03-16 domain-researcher 설계 시에도 동일 위반이 발생하여 2회째 반복. 규칙 정의는 명확했으나 "우선적으로 확인합니다"라는 표현이 recommendation으로 인식되어 blocking되지 않음
+- **해결**: CLAUDE.md 핵심 규칙 4번에 [사전 확인] 라벨 추가 + "예외 없음. 확인 완료 후 작업을 시작합니다" blocking 문구 명시. claude-md-template.md, zero-to-one-advisor CLAUDE.md 동기화
+- **교훈**: 규칙이 반복 위반되면 표현의 강도를 점검해야 한다. "우선적으로"는 recommendation, "반드시 + 완료 후"는 blocking requirement — 의무 수준에 맞는 표현을 사용해야 한다
+
+### [2026-03-17] 웹 서칭 후 knowledge 업데이트 누락 — 사후 기록 의무 명시
+- **상황**: zero-to-one-advisor 피드백 반영 중 웹 서칭을 수행했으나, 새로 알게 된 정보를 knowledge topic으로 정리하지 않음
+- **문제**: 규칙 4번이 사전 확인과 사후 기록을 구분하지 않고 하나의 블록으로 기술되어 있어, 사전 확인만 지키면 된다고 오인
+- **해결**: CLAUDE.md 핵심 규칙 4번에 [사후 기록] 라벨을 별도 bullet으로 분리하고, 자동 트리거 3조건을 인라인으로 통합
+- **교훈**: 하나의 규칙에 여러 의무가 포함될 경우, 각 의무를 명시적으로 라벨링하여 분리해야 한다. 그래야 일부만 이행하는 부분 준수를 방지할 수 있다
 
 ### [2026-03-16] 사용자 요청 처리 전 knowledge/ 확인 필수
 - **상황**: domain-researcher subagent 설계 시 knowledge/ 확인 없이 바로 초안 작성에 착수하려 함

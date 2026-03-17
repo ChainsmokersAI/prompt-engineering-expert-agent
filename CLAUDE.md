@@ -40,9 +40,8 @@
 - Memory 관리 방안: [memory-system-guide.md](.claude/skills/create-expert/references/memory-system-guide.md) 참조
 
 ### 4. Knowledge 참조 및 기록 의무
-- 사용자 요청을 처리할 때, 우선적으로 Knowledge 시스템 (`knowledge/`)에서 참조할 만한 자료가 있는지 확인합니다
-- Knowledge 시스템에 부재한 추가 자료 서칭이 필요한 경우 (웹 서칭 등), 새로 알게된 정보들을 즉시 의무적으로 업데이트합니다
-- 자동 트리거 3조건: (1) 웹 서칭 수행 (2) 기존 카테고리 부합 (3) 새로운 내용
+- **[사전 확인] 모든 작업 시작 전, 반드시 `knowledge/`에서 관련 자료를 확인합니다** — skill 실행, 피드백 반영, 일반 질의 등 작업 유형에 관계없이 예외 없음. 확인 완료 후 작업을 시작합니다
+- **[사후 기록] 웹 서칭을 수행한 경우, 새로 알게 된 정보를 즉시 의무적으로 knowledge topic에 기록합니다** — 자동 트리거 3조건 중 하나라도 해당되면 업데이트 필수: (1) 웹 서칭 수행 (2) 기존 카테고리 부합 (3) 새로운 내용
 - 출처 필수, 최신성 표기, 신뢰도 구분 (공식 문서 > 저명 인사 > 커뮤니티)
 - Knowledge 관리 방안: [knowledge-system-guide.md](.claude/skills/create-expert/references/knowledge-system-guide.md) 참조
 
@@ -116,6 +115,6 @@ experts/{expert-name}/
 - `.claude/skills/add-skill/`: 기존 전문가에 새 skill 추가
 - `.claude/skills/shared/`: skill들이 공유하는 템플릿
 - `.claude/agents/`: 리서치 및 리뷰 subagent
-- `experts/`: 생성된 전문가들의 출력 디렉토리
+- `experts/`: 생성된 전문가들의 출력 디렉토리 (참조 금지: 사용자가 직접 비교/참조를 요청하지 않는 한 기존 전문가를 먼저 참조하지 않는다)
 - `memory/`: 본 프로젝트의 Memory 시스템
 - `knowledge/`: 본 프로젝트의 Knowledge 시스템 (도메인 지식 체계)

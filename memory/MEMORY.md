@@ -2,27 +2,33 @@
 
 ## 프로젝트 현황
 
-- **버전**: 첫 번째 전문가 에이전트 생성 완료 (2026-03-16)
+- **버전**: 두 번째 전문가 에이전트 생성 + 피드백 반영 완료 (2026-03-17)
 - **구조**: create-expert + add-skill 2개 skill, shared/(템플릿 2개: agent-template, claude-md-template), create-expert/references/(Memory·Knowledge·Persona 가이드 3개), 2개 subagent(domain-researcher opus, expert-reviewer opus), knowledge/ 시스템 (3개 카테고리)
-- **최근 완료**: domain-researcher YouTube MCP 통합 (2026-03-16)
-- **MCP 서버**: youtube-data (icraft2170/youtube-data-mcp-server) — 9개 Tool 중 7개 정상, 1개 부분(getTranscripts: 자막 존재 시만), 1개 실패(getRelatedVideos: YouTube API deprecated)
+- **최근 완료**: 범용 교훈 상속 — zero-to-one-advisor MEMORY.md 초기화 + create-expert SKILL.md 가이드 추가 (2026-03-17)
+- **MCP 서버**: youtube-data (icraft2170/youtube-data-mcp-server) — 9개 Tool 중 7개 정상, 1개 부분(getTranscripts: 자막 존재 시만), 1개 실패(getRelatedVideos: YouTube API deprecated). `.mcp.json`은 `${VAR}` 환경 변수 확장 사용 (API 키 분리, git 커밋 가능)
 - **domain-researcher YouTube 통합**: tools에 MCP 4개 추가, 소스 유형 확장, YouTube 활용 가이드/quota 전략 추가, 핵심 인물 탐색에 YouTube 채널 활용 가이드 추가
-- **생성된 전문가**: serial-entrepreneur-agent (초기 스타트업 아이디어 검증, 등급 A)
-- **피드백 반영 완료 (serial-entrepreneur-agent)**: 2건의 사용자 피드백 → 근본 원인 3개 파일(knowledge-system-guide.md, create-expert/SKILL.md, domain-researcher.md)에 재발 방지 가이드 추가 완료 (2026-03-16). experts/ 하위 파일은 사용자가 직접 보완 예정
+- **생성된 전문가**: serial-entrepreneur-agent (초기 스타트업 아이디어 검증, 등급 A), zero-to-one-advisor (초기 스타트업 Zero-to-One 전문가, 등급 B→A 수정 완료)
+- **피드백 반영 완료 (serial-entrepreneur-agent)**: 2건의 사용자 피드백 → 근본 원인 3개 파일에 재발 방지 가이드 추가 완료 (2026-03-16)
+- **zero-to-one-advisor 생성 완료 (2026-03-16)**: 34개 파일. expert-reviewer 검증 후 필수 수정 1건 + 권장 개선 1건 반영 완료
+- **zero-to-one-advisor 사용자 피드백 반영 완료 (2026-03-17)**: 3건 피드백 → 5개 파일 수정 (CLAUDE.md Sales Deck 역할 수정, sales-deck SKILL.md Pitch Deck 과도 강조 제거, 4개 skill description 차별화)
 - **Part A/B 분리 적용 완료**: domain-researcher 결과물을 Part A (설계 요약) + Part B (원본 자료)로 분리. 서브에이전트 요약에 의한 정보 유실 방지 (2026-03-16)
 
 ## 다음 세션 할 일
 
-(없음)
+- (없음)
 
 ## 핵심 교훈
 
 ### 최신 교훈
 
+- 각 전문가는 별도 프로젝트이므로, subagent가 MCP 도구를 사용하면 해당 프로젝트에 `.mcp.json`이 필요하다. `.mcp.json`의 민감값은 `${VAR}` 환경 변수 확장으로 작성하여 git 커밋 가능하게 관리한다
+- Knowledge 규칙 4번의 두 의무(사전 확인 + 사후 기록)는 독립적이다 — 하나만 지키면 되는 것이 아니라 둘 다 매번 지켜야 한다
 - 세션 재시작이 필요한 작업 시, 반드시 미완료 작업을 MEMORY.md `## 다음 세션 할 일`에 기록한 후 종료해야 한다 (세션 핸드오프)
 - 서브에이전트가 요약하여 반환하면 정보 유실이 발생한다. 원본 자료는 최대한 보존하여 반환하고, 소비자(create-expert)가 맥락에 맞게 가공해야 한다 (Part A/B 분리)
 - Knowledge 카테고리명은 내용을 즉시 파악할 수 있도록 구체적으로 명명해야 한다 (`domain-specific` ✗ → `ai-simulation-qa` 등 ✓)
 - 사용자의 용어를 자의적으로 해석하지 않는다. Sales Deck ≠ Pitch Deck — 범위를 정확히 확인하고 반영해야 한다
+- 교훈의 핵심 원리를 이해하고, 예시에 과도 집중하지 않는다 — 예: "자의적 해석 금지"가 핵심이지, "Sales Deck vs Pitch Deck 구분을 강조하라"가 핵심이 아님
+- skill description은 태그/키워드 나열이 아닌, 자연스러운 문장으로 각 skill의 핵심 가치와 트리거 조건을 명시적으로 서술한다
 - 참조 파일 재배치: 실질적 소비자가 skill이면 해당 skill 하위 `references/`로 이동해야 한다 (루트 `references/` 삭제됨)
 - SKILL.md에서 핵심 내용/원칙을 절차보다 먼저 제시해야 한다 — LLM이 "왜 이렇게 하는지" 모른 채 실행하는 것을 방지
 - 인터뷰는 분야/역할/지식/멘토에 집중하고, 스타일/도구는 리서치 후 제안해야 한다
@@ -62,13 +68,16 @@
 
 | 실수 | 해결법 |
 |------|--------|
-| Memory 기록 누락 (2회 반복) | 모든 작업 완료 후 반드시 Memory 업데이트 — 사용자 요청 없어도 자동 수행 |
+| Memory 기록 누락 (3회 반복) | 모든 작업 완료 후 반드시 Memory 업데이트 — MEMORY.md뿐 아니라 task-log, lessons-learned 등 하위 파일도 빠짐없이 |
 | 프로젝트 memory 우선순위 역전 (2회 반복) | 기록 순서: 프로젝트 memory/ 먼저 → auto memory 그 다음. 절대 뒤바꾸지 않는다 |
 | 스킬 변경 시 CLAUDE.md 핵심 명령어 미동기화 | 스킬 추가/분리/삭제 시 반드시 CLAUDE.md 핵심 명령어 섹션 함께 업데이트 |
 | Knowledge index.md topic 수 미갱신 | topic 파일 추가 시 반드시 루트 index.md의 topic 수도 함께 갱신 |
-| 사용자 요청 처리 시 knowledge/ 미확인 (1회) | 핵심 규칙 4번: 요청 처리 전 반드시 knowledge/에서 관련 자료 존재 여부를 먼저 확인한다 |
+| 사용자 요청 처리 시 knowledge/ 미확인 **(2회 반복)** | 반드시 knowledge/를 먼저 확인한 후 작업을 시작한다. 확인 없이 작업을 시작하지 않는다 |
+| 웹 서칭 후 knowledge 업데이트 누락 (1회) | 웹 서칭을 수행했으면, 작업 완료 전 반드시 knowledge topic을 생성/업데이트한다. 3조건(웹 서칭 수행 + 기존 카테고리 부합 + 새로운 내용) 중 하나라도 해당되면 필수 |
 | 사용자 피드백 후 skill/subagent 미개선 (1회) | 핵심 규칙 5번: Memory에만 기록하지 않고, 원인이 된 skill/subagent 파일도 반드시 개선한다 |
 | 세션 재시작 전 미완료 작업 미기록 (1회) | 세션 핸드오프: MEMORY.md `## 다음 세션 할 일`에 미완료 작업 + 배경 맥락을 기록한 후 종료한다 |
+| 기존 전문가 선제 참조 (1회) | experts/ 내 기존 전문가는 사용자가 직접 비교/참조를 요청하지 않는 한 절대 먼저 참조 금지 |
+| 전문가 생성 시 MCP 설정 미상속 (1회) | 각 전문가는 별도 프로젝트이므로, subagent가 `mcp__` 도구를 사용하면 해당 프로젝트에 `.mcp.json`이 필요하다. create-expert 5단계에서 확인 |
 
 ## 사용자 핵심 선호
 
@@ -79,6 +88,7 @@
 - 전문 용어는 원문 표기 (skill, subagent 등), 대/소문자는 문맥에 따라 자유
 - 파일 수정 시 기존 문체(~합니다 등) 반드시 유지
 - Git Push 대상 프로젝트이므로 개인 정보(이름, 이메일 등) 파일에 포함 금지
+- **기존 전문가 참조 금지**: experts/ 내 기존 전문가 에이전트를 사용자가 직접 비교/참조를 요청하지 않는 한 절대 먼저 참조하지 않는다 (정말 중요한 사안)
 
 ## 참조
 

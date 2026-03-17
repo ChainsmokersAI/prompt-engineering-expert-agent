@@ -53,6 +53,10 @@ claude mcp reset-project-choices
 ## 주요 특성
 
 - **환경 변수 확장**: `.mcp.json`에서 `${VAR}` 또는 `${VAR:-default}` 문법 지원
+  - **지원 위치**: `command`, `args`, `env`, `url`, `headers` 필드
+  - **`.env` 자동 로딩 미지원**: 쉘 환경 변수로 설정해야 함 (`~/.zshrc`, `export`, `direnv` 등)
+  - **미설정 시**: 기본값 없는 환경 변수가 미설정이면 config 파싱 실패
+  - **권장 패턴**: API 키 등 민감값은 `${VAR}`로 작성하여 `.mcp.json`을 git 커밋 가능하게 관리
 - **보안**: project scope 서버는 첫 사용 시 사용자 승인 필요
 - **Transport 유형**: stdio (기본값), sse, http 지원
 

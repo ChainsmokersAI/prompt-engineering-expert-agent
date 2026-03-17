@@ -91,6 +91,7 @@ domain-researcher 서브에이전트로 해당 분야의 지식과 멘토 철학
 - `references/memory-system-guide.md`, `references/knowledge-system-guide.md`
 - `.claude/skills/{skill-name}/SKILL.md`: 메인 skill
 - `memory/MEMORY.md`, `memory/task-log.md`, `memory/lessons-learned.md`, `memory/user-preferences.md`
+  - MEMORY.md 생성 시, 본 프로젝트 `memory/MEMORY.md`에서 도메인 무관한 범용 교훈(Memory/Knowledge 운영, 범용 원칙, 자주 하는 실수, 사용자 핵심 선호)을 상속합니다
 - `knowledge/index.md`, `knowledge/{category}/index.md`, `knowledge/{category}/{topic}.md`
 
 **Knowledge topic 생성 지침**:
@@ -102,6 +103,7 @@ domain-researcher 서브에이전트로 해당 분야의 지식과 멘토 철학
 **필요 시**:
 - `.claude/skills/{skill-name}/references/`: 참조 문서
 - `.claude/agents/`: subagent 정의
+- `.mcp.json`: subagent가 `mcp__` 도구를 사용하는 경우 — 부모 프로젝트의 `.mcp.json`에서 필요한 MCP 서버 설정을 가져와 생성. API 키 등 민감값은 환경 변수 확장(`${VAR}`)으로 작성. README.md에 필요한 환경 변수 안내 추가
 
 생성 시 참고:
 - 템플릿: [../shared/templates/](../shared/templates/)

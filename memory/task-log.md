@@ -1,5 +1,91 @@
 # 작업 이력
 
+## 2026-03-17: 범용 교훈 상속 — zero-to-one-advisor + create-expert
+
+### [2026-03-17] 범용 교훈 상속 구현 - 완료
+- **목적**: PE expert에서 축적한 도메인 무관한 범용 교훈을 (1) zero-to-one-advisor에 즉시 상속하고, (2) create-expert SKILL.md에 향후 전문가 생성 시 범용 교훈 상속 가이드를 추가
+- **수정 파일 (2개)**:
+  - `experts/zero-to-one-advisor/memory/MEMORY.md`: "(사용하면서 축적)" 플레이스홀더를 범용 교훈으로 교체 — 핵심 교훈 7개 (Memory/Knowledge 운영 5 + 범용 원칙 2), 자주 하는 실수 6개, 사용자 핵심 선호 5개
+  - `.claude/skills/create-expert/SKILL.md`: 5단계 93줄 memory 파일 생성 항목에 범용 교훈 상속 가이드 1줄 추가
+- **검증**: zero-to-one-advisor MEMORY.md 51줄 (200줄 이내) ✓, create-expert SKILL.md 125줄 (500줄 이내) ✓
+
+---
+
+## 2026-03-17: MCP 설정 상속 체크 + 환경 변수 확장 전환
+
+### [2026-03-17] MCP 설정 상속 체크 추가 + `.mcp.json` 환경 변수 확장 전환 - 완료
+- **목적**: 전문가 프로젝트가 별도 프로젝트이므로 MCP 설정도 독립적으로 필요함을 반영. 루트 `.mcp.json`의 API 키를 환경 변수 확장으로 전환하여 git 커밋 가능하게 변경
+- **수정 파일 (10개)**:
+  - `.mcp.json`: API 키 → `${YOUTUBE_API_KEY}` 환경 변수 확장 전환
+  - `.gitignore`: `.mcp.json` 제거 (민감 정보 미포함)
+  - `.claude/skills/create-expert/SKILL.md`: 5단계 필요 시에 MCP 설정 가이드 추가
+  - `.claude/agents/expert-reviewer.md`: 서브에이전트 검증에 MCP 일관성 검증 3항목 추가
+  - `experts/zero-to-one-advisor/.mcp.json`: 신규 생성 (YouTube MCP, ${VAR} 패턴)
+  - `experts/zero-to-one-advisor/README.md`: MCP 설정 안내 섹션 추가
+  - `knowledge/claude-code/mcp-server-configuration.md`: ${VAR} 환경 변수 확장 상세 보강
+  - `memory/MEMORY.md`: 현황 + 교훈 + 자주 하는 실수 추가
+  - `memory/lessons-learned.md`: 교훈 1건 추가
+  - `memory/task-log.md`: 작업 이력 추가
+
+---
+
+## 2026-03-17: 핵심 규칙 4번 위반 재발 방지 조치
+
+### [2026-03-17] 핵심 규칙 4번(Knowledge 참조 및 기록 의무) 위반 재발 방지 - 완료
+- **목적**: knowledge/ 사전 확인 2회째 누락 + 웹 서칭 후 knowledge 사후 기록 누락에 대한 구조적 재발 방지
+- **근본 원인**: 규칙 정의는 명확했으나 "우선적으로 확인합니다"가 blocking이 아닌 recommendation으로 인식됨. 사전 확인과 사후 기록이 하나의 블록으로 기술되어 부분 준수 발생
+- **수정 파일 (6개)**:
+  - `CLAUDE.md`: 핵심 규칙 4번 강화 — [사전 확인]/[사후 기록] 라벨 분리, blocking requirement화 ("예외 없음. 확인 완료 후 작업을 시작합니다")
+  - `.claude/skills/shared/templates/claude-md-template.md`: CLAUDE.md 규칙 4번과 동기화
+  - `experts/zero-to-one-advisor/CLAUDE.md`: CLAUDE.md 규칙 4번과 동기화
+  - `memory/MEMORY.md`: 자주 하는 실수 테이블 업데이트 (2회 반복 + 신규 항목) + 핵심 교훈 추가
+  - `memory/lessons-learned.md`: 교훈 2건 추가 (사전 확인 반복 누락, 사후 기록 누락)
+  - `memory/task-log.md`: 작업 이력 추가
+- **검증**: CLAUDE.md ↔ template ↔ zero-to-one-advisor 규칙 4번 내용 일치, MEMORY.md 200줄 이내 유지
+
+---
+
+## 2026-03-17: zero-to-one-advisor 사용자 피드백 반영
+
+### [2026-03-17] zero-to-one-advisor 사용자 피드백 3건 반영 - 완료
+- **목적**: 사용자가 직접 검토 후 제공한 3건의 피드백을 반영하여 전문가 에이전트 품질 개선
+- **피드백 내용**:
+  1. CLAUDE.md Sales Deck 역할 설명이 목적("초기 고객 확보")을 반영하지 못하고 Pitch Deck 구분에 치중
+  2. sales-deck-consulting SKILL.md 핵심 원칙에서 Sales Deck vs Pitch Deck 구분이 과도하게 강조됨
+  3. 4개 skill description이 모호하고, idea-validation-consulting의 트리거 조건이 다른 skill들과 중복 (Smoke Test 등)
+- **수정 파일 (5개)**:
+  - `CLAUDE.md` 10행: "Pitch Deck과의 차이를 명확히 구분" → "유의미한 초기 고객 확보를 돕습니다"
+  - `sales-deck-consulting/SKILL.md`: description 수정 + 핵심 원칙에서 "Sales Deck ≠ Pitch Deck" 섹션 삭제 + 워크플로우 1단계 톤다운
+  - `idea-validation-consulting/SKILL.md`: description 수정 (키워드 나열 → 행동 기반 트리거, Smoke Test 제거)
+  - `landing-page-consulting/SKILL.md`: description 수정 (구체적 산출물 명시, Smoke Test 페이지 전담)
+  - `ai-trend-analysis/SKILL.md`: description 수정 ("기회" → "타이밍 판단" 차별화)
+- **검증**: 4개 description 1024자 이내 ✓, sales-deck SKILL.md 105줄 (500줄 이내) ✓, 트리거 조건 겹침 없음 ✓
+- **근본 원인 분석**: 교훈의 핵심 원리("자의적 해석 금지")를 이해하지 못하고 예시("Sales Deck vs Pitch Deck 구분")에 과도 집중하여, 구분 자체를 핵심 원칙으로 격상시킨 것이 문제
+
+---
+
+## 2026-03-16: zero-to-one-advisor 전문가 생성
+
+### [2026-03-16] zero-to-one-advisor 전문가 에이전트 신규 생성 - 완료
+- **목적**: IT/AI 업계 PM 출신, YC Batch 경험의 Zero-to-One 전문가 에이전트 생성
+- **인터뷰**: 이전 세션에서 완료 — 분야(초기 스타트업 Zero-to-One), 핵심 역할 4가지(아이디어 검증, 랜딩 페이지, Sales Deck, AI 트렌드 분석), 멘토 3인(Eric Ries, Peter Thiel, Paul Graham)
+- **리서치**: subagent:domain-researcher — Part A (설계 요약) + Part B (원본 자료 15개 topic) 반환, 교차 검증 10건 완료
+- **구조 및 디테일 협의**: 이전 세션에서 사용자 확인 완료 (3단계 구조 → 4단계 디테일)
+- **생성 파일 (34개)**:
+  - `CLAUDE.md` (84줄) + `README.md`
+  - `references/` (memory-system-guide.md, knowledge-system-guide.md 복사)
+  - `.claude/skills/` 4개 SKILL.md (idea-validation-consulting 108줄, landing-page-consulting 98줄, sales-deck-consulting 113줄, ai-trend-analysis 96줄)
+  - `.claude/agents/startup-researcher.md` (Opus, 범용 리서치)
+  - `memory/` 4개 파일 (MEMORY.md + task-log + lessons-learned + user-preferences)
+  - `knowledge/` 21개 파일 (6 index + 15 topic, 5개 카테고리)
+- **검증**: subagent:expert-reviewer 등급 B
+  - 필수 수정 1건: startup-researcher.md에서 Bash 도구 제거 (최소 권한 원칙 위배) → 반영 완료
+  - 권장 개선 1건: CLAUDE.md 프로젝트 구조에서 숫자 제거 → knowledge/index.md를 single source of truth → 반영 완료
+  - 권장 개선 1건 (미적용): ai-startup-trends 카테고리 topic 추가 — 사용하면서 축적 예정
+- **특이사항**: 이전 세션(트랜스크립트 518fb112)의 리서치 결과를 JSONL에서 추출하여 활용. 트랜스크립트에서 43,138자 분량의 domain-researcher Part B 원본 자료를 복원
+
+---
+
 ## 2026-03-16: domain-researcher YouTube MCP 통합
 
 ### [2026-03-16] domain-researcher.md YouTube MCP 통합 업데이트 - 완료

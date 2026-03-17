@@ -16,7 +16,6 @@ experts/
 # Environment / Secrets
 .env
 .env.*
-.mcp.json
 
 # Node (if any)
 node_modules/
