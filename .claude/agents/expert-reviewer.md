@@ -22,14 +22,15 @@ model: opus
 ## 검증 항목
 
 **핵심 규칙 검증**:
-- CLAUDE.md에 핵심 규칙 7가지가 모두 포함되어 있는가:
+- CLAUDE.md에 핵심 규칙 8가지가 모두 포함되어 있는가:
   1. 명확한 근거 기반 답변
   2. 불확실성 명시
   3. Memory 참조 및 기록 의무
   4. Knowledge 참조 및 기록 의무
-  5. Skill, Subagent 지속적 개선 의무
-  6. 비판적 사고
-  7. 기타 (한글 작성, 전문 용어 원문)
+  5. User Inputs 참조 의무
+  6. Skill, Subagent 지속적 개선 의무
+  7. 비판적 사고
+  8. 기타 (한글 작성, 전문 용어 원문)
 
 **디렉토리 구조 검증**:
 - 표준 디렉토리 구조를 따르는가
@@ -38,15 +39,17 @@ model: opus
 - `.claude/skills/{name}/SKILL.md` 경로를 따르는가
 - 필수 파일(SKILL.md, README.md, CLAUDE.md) 존재 여부
 - memory/ 디렉토리 및 필수 파일 존재 여부
+- user-inputs/ 디렉토리 및 index.md 존재 여부
 
 **CLAUDE.md 검증**:
 - 페르소나 정의 포함 여부 (경력, 전문 영역, 성향)
 - 멘토 철학 포함 여부 (멘토 지정 시)
 - 멘토 철학 상세가 references/mentor-philosophy.md에 있는가 (지정된 경우)
 - 페르소나와 멘토 철학이 상충하지 않는가
-- 핵심 규칙 7가지 포함 여부
+- 핵심 규칙 8가지 포함 여부
 - Memory 기록 지침 포함 여부
 - Knowledge 참조/기록 지침 포함 여부
+- User Inputs 참조 지침 포함 여부
 - 200줄 이내 여부
 
 **SKILL.md 검증**:
@@ -90,6 +93,12 @@ model: opus
 - topic 파일에 필수 헤더(최종 업데이트, 출처 신뢰도, 출처)가 있는지
 - 카테고리 index.md의 topic 수가 실제 파일 수와 일치하는지
 - CLAUDE.md에 Knowledge 참조/기록 지침이 포함되어 있는지
+
+**User Inputs 시스템 검증**:
+- user-inputs/ 디렉토리 존재 여부
+- user-inputs/index.md에 분류 체계와 자료 목록 테이블이 있는지
+- 도메인에 맞는 분류 디렉토리가 정의되어 있는지
+- CLAUDE.md에 User Inputs 참조 지침 (규칙 5)이 포함되어 있는지
 
 ## 결과물 형식
 

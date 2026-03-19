@@ -1,5 +1,22 @@
 # 작업 이력
 
+## 2026-03-19: User Inputs 3체계 시스템 적용
+
+### [2026-03-19] User Inputs 시스템 전체 적용 - 완료
+
+- **작업**: 기존 2체계(Memory+Knowledge)를 3체계(+User Inputs)로 확장
+- **수정 파일 (8개)**:
+  1. 신규: `.claude/skills/create-expert/references/user-inputs-guide.md` — 범용 User Inputs 가이드 (3체계 개념, 디렉토리 구조, 저장 규칙, 에이전트 참조 기준, 자료 등록 워크플로우, index.md 작성 규칙)
+  2. 수정: `.claude/skills/create-expert/references/memory-system-guide.md` — 2열→3열 비교표, 참조 링크 추가
+  3. 수정: `.claude/skills/create-expert/references/knowledge-system-guide.md` — 2체계→3체계 개념, 2열→3열 비교표, 참조 링크 추가
+  4. 수정: `.claude/skills/create-expert/SKILL.md` — 4단계 User Inputs 분류 계획, 5단계 필수 파일 추가, 참고 링크 추가
+  5. 수정: `.claude/skills/shared/templates/claude-md-template.md` — 규칙 5 삽입(5~7→6~8), 프로젝트 구조에 user-inputs/ 추가, 확인사항 7→8가지
+  6. 수정: `.claude/agents/expert-reviewer.md` — 핵심 규칙 7→8가지, 디렉토리/CLAUDE.md 검증 항목 추가, User Inputs 시스템 검증 섹션 신규
+  7. 수정: `CLAUDE.md` — 규칙 5 삽입(5~7→6~8), 핵심 명령어 설명 확장, 폴더 구조/프로젝트 구조에 user-inputs/ 추가
+  8. 신규: `user-inputs/index.md` — 본 프로젝트용 빈 인덱스
+- **추가 수정**: `memory/user-preferences.md` "핵심 규칙 7가지" → "8가지" 동기화
+- **검증**: "규칙 7가지" 잔존 없음 (task-log 과거 기록 제외), CLAUDE.md 130줄 ≤ 200줄, 참조 링크 정상, 3체계 비교표 3개 파일 일관
+
 ## 2026-03-17: 브라우저 자동화 상담 + MEMORY.md 누락 수정
 
 ### [2026-03-17] 브라우저 자동화 방식 상담 - 완료

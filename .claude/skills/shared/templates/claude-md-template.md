@@ -58,16 +58,23 @@
 - 출처 필수, 최신성 표기, 신뢰도 구분 (공식 문서 > 저명 인사 > 커뮤니티)
 - Knowledge 관리 방안: [knowledge-system-guide.md](references/knowledge-system-guide.md) 참조
 
-### 5. Skill, Subagent 지속적 개선 의무
+### 5. User Inputs 참조 의무
+- **모든 작업 시작 전, `user-inputs/index.md`를 확인합니다** — 현재 작업과 관련된 사용자 제공 자료가 있는지 판단합니다
+- 관련 자료가 있으면 해당 파일을 Read하여 작업에 반영합니다. 없으면 참조 없이 진행합니다
+- 사용자가 자료를 제공하면 원본 그대로 `user-inputs/`에 저장합니다 (에이전트 가공 금지)
+- 사용자 요청 시에만 삭제합니다 (시간 경과에 따른 자동 탈락 없음)
+- User Inputs 관리 방안: [user-inputs-guide.md](references/user-inputs-guide.md) 참조
+
+### 6. Skill, Subagent 지속적 개선 의무
 - Skill, subagent를 실행하고 사용자로부터 피드백을 받으면, 이를 기반으로 skill, subagent (md 파일)를 즉시 개선합니다
 - 수정 내용은 반영 전에 반드시 사용자에게 승인을 받도록 합니다
 - 이와 별개로 작업 내용, 사용자 피드백 등은 Memory 시스템 (task-log, user-preferences 등)에도 기록합니다
 
-### 6. 비판적 사고
+### 7. 비판적 사고
 - 사용자 의견에 무조건적으로 긍정하지 않도록 합니다 (긍정 편향 금지)
 - 명확한 근거 자료를 기반으로 잘못되거나 더 나은 방향이 있는 경우, 건설적인 비판을 제공합니다
 
-### 7. 기타
+### 8. 기타
 - 모든 파일 내용은 한글로 작성하되, 전문적인 내용은 원문 그대로 작성합니다
 
 ## 핵심 명령어
@@ -81,6 +88,7 @@
 - `references/`: CLAUDE.md 참조 가이드 (Memory, Knowledge 등)
 - `memory/`: Memory 시스템
 - `knowledge/`: Knowledge 시스템
+- `user-inputs/`: User Inputs 시스템 (사용자 제공 원본 자료)
 ```
 
 ---
@@ -90,6 +98,6 @@
 1. 200줄 이내인가?
 2. 페르소나 정의가 구체적인가?
 3. 멘토 철학이 포함되어 있는가? (멘토 지정 시)
-4. 핵심 규칙 7가지가 모두 있는가? (근거 기반, 불확실성, Memory, Knowledge, Skill/Subagent 개선, 비판적 사고, 기타)
+4. 핵심 규칙 8가지가 모두 있는가? (근거 기반, 불확실성, Memory, Knowledge, User Inputs, Skill/Subagent 개선, 비판적 사고, 기타)
 5. 핵심 명령어가 안내되어 있는가?
 6. Knowledge 시스템 지침이 포함되어 있는가?

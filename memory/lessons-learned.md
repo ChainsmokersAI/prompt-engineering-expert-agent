@@ -1,5 +1,12 @@
 # 학습 기록
 
+## User Inputs 시스템 적용
+
+### [2026-03-19] 3체계 시스템 확장 시 동기화 포인트
+
+- **상황**: 2체계→3체계 확장 시 수정 필요한 파일이 8개로 분산
+- **교훈**: 시스템 체계를 확장할 때 동기화해야 하는 파일 목록: (1) 가이드 파일 3개 (memory/knowledge/user-inputs), (2) 템플릿 (claude-md-template), (3) 검증 도구 (expert-reviewer), (4) 생성 skill (create-expert/SKILL.md), (5) 본 프로젝트 CLAUDE.md, (6) memory 내 현황 파일 (user-preferences). "규칙 N가지" 같은 숫자 참조가 여러 파일에 분산되므로, Grep으로 잔존 검증 필수
+
 ## FUSE 파일시스템 관련
 
 ### [2026-03-15] mv 명령으로 파일 손상

@@ -78,6 +78,7 @@ domain-researcher 서브에이전트로 해당 분야의 지식과 멘토 철학
 - SKILL.md 원칙 및 워크플로우 초안
 - Memory 초기 구조
 - Knowledge 카테고리 및 초기 topic 계획 (카테고리명은 이름만으로 내용을 파악할 수 있도록 구체적으로 명명 — 가이드: [knowledge-system-guide.md](references/knowledge-system-guide.md))
+- User Inputs 분류 체계 계획 (도메인에 맞는 분류 디렉토리 2-3개 — 가이드: [user-inputs-guide.md](references/user-inputs-guide.md))
 - Subagent 역할 및 도구 목록 (필요 시)
 
 사용자 확인 후 다음 단계로 진행합니다.
@@ -88,11 +89,12 @@ domain-researcher 서브에이전트로 해당 분야의 지식과 멘토 철학
 
 **필수 파일**:
 - `CLAUDE.md`: 페르소나, 멘토 철학, 핵심 규칙
-- `references/memory-system-guide.md`, `references/knowledge-system-guide.md`
+- `references/memory-system-guide.md`, `references/knowledge-system-guide.md`, `references/user-inputs-guide.md`
 - `.claude/skills/{skill-name}/SKILL.md`: 메인 skill
 - `memory/MEMORY.md`, `memory/task-log.md`, `memory/lessons-learned.md`, `memory/user-preferences.md`
   - MEMORY.md 생성 시, 본 프로젝트 `memory/MEMORY.md`에서 도메인 무관한 범용 교훈(Memory/Knowledge 운영, 범용 원칙, 자주 하는 실수, 사용자 핵심 선호)을 상속합니다
 - `knowledge/index.md`, `knowledge/{category}/index.md`, `knowledge/{category}/{topic}.md`
+- `user-inputs/index.md`
 
 **Knowledge topic 생성 지침**:
 - domain-researcher가 반환한 **Part B (원본 자료)**를 기반으로 초기 topic 파일을 생성합니다
@@ -109,6 +111,7 @@ domain-researcher 서브에이전트로 해당 분야의 지식과 멘토 철학
 - 템플릿: [../shared/templates/](../shared/templates/)
 - Memory 가이드: [references/memory-system-guide.md](references/memory-system-guide.md)
 - Knowledge 가이드: [references/knowledge-system-guide.md](references/knowledge-system-guide.md)
+- User Inputs 가이드: [references/user-inputs-guide.md](references/user-inputs-guide.md)
 - 페르소나/멘토 가이드: [references/persona-mentor-guide.md](references/persona-mentor-guide.md)
 
 구현 완료 후 사용자에게 생성 결과를 보고합니다:
