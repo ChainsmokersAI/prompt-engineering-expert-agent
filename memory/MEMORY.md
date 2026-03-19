@@ -4,12 +4,13 @@
 
 - **버전**: User Inputs 3체계 시스템 적용 완료 (2026-03-19)
 - **구조**: create-expert + add-skill 2개 skill, shared/(템플릿 2개: agent-template, claude-md-template), create-expert/references/(Memory·Knowledge·User Inputs·Persona 가이드 4개), 2개 subagent(domain-researcher opus, expert-reviewer opus), knowledge/ 시스템 (3개 카테고리), user-inputs/ 시스템
-- **최근 완료**: User Inputs 3체계 시스템 적용 — 기존 2체계(Memory+Knowledge)를 3체계(+User Inputs)로 확장. 8개 파일 수정/생성, 핵심 규칙 7→8가지, 모든 비교표·검증항목·템플릿 동기화 완료 (2026-03-19)
+- **최근 완료**: Multi-Agent Communication 리서치 → knowledge 기록 (Agent Teams, A2A Protocol, 프레임워크 비교, 유스케이스별 접근법 3가지) (2026-03-19)
 - **MCP 서버**: `.mcp.json`은 `${VAR}` 환경 변수 확장 사용 (API 키 분리, git 커밋 가능)
   - youtube-data (youtube-data-mcp-server) — 9개 Tool 중 7개 정상, 1개 부분(getTranscripts: 자막 존재 시만), 1개 실패(getRelatedVideos: YouTube API deprecated)
   - naver-search (@isnow890/naver-search-mcp) — 네이버 검색 11종 + DataLab 2종 + 유틸리티 1종. 환경 변수: `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET`
 - **domain-researcher MCP 통합**: YouTube 4개 + 네이버 4개(blog, news, web, cafe) 도구 사용. YouTube/네이버 활용 가이드 포함. 네이버는 라이프스타일 분야 리서치에 특히 효과적
 - **3체계 시스템**: Memory(경험 기록) + Knowledge(도메인 지식) + User Inputs(사용자 제공 원본 자료). 핵심 규칙 8가지 체제
+- **Knowledge 시스템**: 3개 카테고리 (prompt-engineering: 2, claude-code: 4, agent-design: 4)
 - **생성된 전문가**: serial-entrepreneur-agent (초기 스타트업 아이디어 검증, 등급 A), zero-to-one-advisor (초기 스타트업 Zero-to-One 전문가, 등급 B→A 수정 완료)
 - **피드백 반영 완료 (serial-entrepreneur-agent)**: 2건의 사용자 피드백 → 근본 원인 3개 파일에 재발 방지 가이드 추가 완료 (2026-03-16)
 - **zero-to-one-advisor 생성 완료 (2026-03-16)**: 34개 파일. expert-reviewer 검증 후 필수 수정 1건 + 권장 개선 1건 반영 완료
@@ -24,6 +25,7 @@
 
 ### 최신 교훈
 
+- 솔루션/도구 권장 시, 기능 설명만으로 적합성을 판단하지 않는다. 제약/한계를 공식 문서에서 직접 검증한 후 권장한다. 개요 수준의 정보만으로 단정적 표현('가장 유망', '~에 최적')을 사용하지 않는다
 - 각 전문가는 별도 프로젝트이므로, subagent가 MCP 도구를 사용하면 해당 프로젝트에 `.mcp.json`이 필요하다. `.mcp.json`의 민감값은 `${VAR}` 환경 변수 확장으로 작성하여 git 커밋 가능하게 관리한다
 - Knowledge 규칙 4번의 두 의무(사전 확인 + 사후 기록)는 독립적이다 — 하나만 지키면 되는 것이 아니라 둘 다 매번 지켜야 한다
 - 세션 재시작이 필요한 작업 시, 반드시 미완료 작업을 MEMORY.md `## 다음 세션 할 일`에 기록한 후 종료해야 한다 (세션 핸드오프)
@@ -56,7 +58,7 @@
 - Memory 기록 순서: MEMORY.md → 하위 파일들(task-log, lessons-learned, user-preferences) → auto memory
 - 프로젝트 memory/가 auto memory보다 항상 우선
 - 프로젝트 `memory/MEMORY.md`는 자동 로딩되지 않으므로 대화 첫 응답 전 반드시 Read 필요
-- Knowledge 시스템 도입 완료 (3개 카테고리: prompt-engineering, claude-code, agent-design)
+- Knowledge 시스템 도입 완료 (3개 카테고리: prompt-engineering, claude-code, agent-design). 총 topic 수: 10
 - 출처에 원본 발행일과 리서치 수행 날짜를 반드시 포함해야 한다
 
 ### Prompt Engineering 핵심 원칙
@@ -81,6 +83,7 @@
 | 세션 재시작 전 미완료 작업 미기록 (1회) | 세션 핸드오프: MEMORY.md `## 다음 세션 할 일`에 미완료 작업 + 배경 맥락을 기록한 후 종료한다 |
 | 기존 전문가 선제 참조 (1회) | experts/ 내 기존 전문가는 사용자가 직접 비교/참조를 요청하지 않는 한 절대 먼저 참조 금지 |
 | 전문가 생성 시 MCP 설정 미상속 (1회) | 각 전문가는 별도 프로젝트이므로, subagent가 `mcp__` 도구를 사용하면 해당 프로젝트에 `.mcp.json`이 필요하다. create-expert 5단계에서 확인 |
+| 리서치 후 적합성 미검증 권장 (1회) | 기능(features)만이 아니라 제약/한계(limitations)도 공식 문서에서 직접 확인 후 권장. 개요 수준의 정보만으로 단정적 권장 금지 |
 
 ## 사용자 핵심 선호
 

@@ -1,5 +1,39 @@
 # 작업 이력
 
+## 2026-03-19: 리서치 기반 권장안의 적합성 미검증 재발 방지
+
+### [2026-03-19] 핵심 규칙 1번(근거 기반 답변) 적합성 검증 의무 추가 - 완료
+
+- **배경**: Agent Teams 리서치 시 기능 설명만으로 "가장 유망"이라 권장했으나, 공식 문서 확인 결과 동일 프로젝트 context 공유 제약이 사용자 유스케이스와 충돌
+- **근본 원인**: 기존 규칙 1번은 "출처 제시"에 초점이었고, 출처의 깊이(기능 vs 제약/한계)를 검증하는 의무가 없었음
+- **수정 파일 (5개)**:
+  1. `CLAUDE.md`: 핵심 규칙 1번에 적합성 검증 bullet 추가
+  2. `.claude/skills/shared/templates/claude-md-template.md`: CLAUDE.md 규칙 1번과 동기화
+  3. `memory/MEMORY.md`: 핵심 교훈 + 자주 하는 실수 추가
+  4. `memory/lessons-learned.md`: 상세 교훈 1건 추가
+  5. `memory/task-log.md`: 작업 이력 추가
+- **검증**: CLAUDE.md ↔ template 규칙 1번 일치, MEMORY.md 200줄 이내 유지
+
+---
+
+## 2026-03-19: Multi-Agent Communication 리서치
+
+### [2026-03-19] 에이전트 간 대화 방법론 리서치 및 Knowledge 기록 - 완료
+
+- **배경**: 사용자가 PE Expert ↔ 생성된 전문가 에이전트 간 대화로 개선점 진단하는 방법을 요청
+- **리서치 범위**: Claude Code Agent Teams, A2A Protocol, Multi-Agent 프레임워크 비교 (CrewAI, LangGraph, AutoGen, Claude Agent SDK), Anthropic 공식 Multi-Agent 사례
+- **주요 발견**:
+  - Claude Code Agent Teams (실험적): Direct Messaging, Shared Task List, Mailbox — 사용자 유스케이스에 가장 적합
+  - A2A Protocol (v1.0): Google 주도, MCP와 상호보완 (MCP=수직, A2A=수평)
+  - Subagent 확장: 안정적이지만 대화가 아닌 위임/보고 모델
+- **권장안**: 1순위 Agent Teams, 2순위 Subagent 확장, 3순위 외부 프레임워크
+- **생성/수정 파일 (3개)**:
+  1. 신규: `knowledge/agent-design/multi-agent-communication.md` — 6개 섹션 (Agent Teams, Subagent, A2A Protocol, 프레임워크 비교, Anthropic 사례, 유스케이스 분석)
+  2. 수정: `knowledge/agent-design/index.md` — topic 행 추가 (3→4)
+  3. 수정: `knowledge/index.md` — agent-design topic 수 3→4
+
+---
+
 ## 2026-03-19: User Inputs 3체계 시스템 적용
 
 ### [2026-03-19] User Inputs 시스템 전체 적용 - 완료
